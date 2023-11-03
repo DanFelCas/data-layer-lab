@@ -32,7 +32,7 @@ class User:
         self._password = password
 
     def get_tuple(self):
-        return self._user_id, self._username, self._password
+        return self._username, self._password
 
     def __str__(self) -> str:
-        return f'user id: {self._user_id}, \n username: {self._username}, \n password: {self._password}'
+        return f'user id: {self._user_id}, \nusername: {self._username}, \npassword: {self._password}'

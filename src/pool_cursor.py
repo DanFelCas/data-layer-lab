@@ -26,6 +26,6 @@ class PoolCursor:
 
 if __name__ == "__main__":
     with PoolCursor() as cursor:
-        cursor.execute('SELECT * FROM persona;')
+        cursor.execute('SELECT * FROM usuario;')
         values = cursor.fetchall()
         print(values)
