@@ -1,4 +1,5 @@
 import sys
+from logger_base import log
 from psycopg2 import pool
 
 
@@ -82,10 +83,10 @@ class Connection:
                     cls._min_con, cls._max_con,
                     **cls._access_credentials.get_credentials()
                 )
-                print(f'Pool generation successful: {cls._pool}')
+                log.debug(f'Pool generation successful: {cls._pool}')
                 return cls._pool
             except Exception as e:
-                print('Something went wrong while getting the pool.'
+                log.error('Something went wrong while getting the pool.'
                       f'\nWith error: {e.__class__.__name__}, {e}')
                 sys.exit()
         else:
@@ -94,18 +95,18 @@ class Connection:
     @classmethod
     def get_connection(cls):
         conn = cls.get_pool().getconn()
-        print(f'Connection established: {conn}')
+        log.debug(f'Connection established: {conn}')
         return conn
 
     @classmethod
     def free_conn(cls, conn):
         cls.get_pool().putconn(conn)
-        print(f'Connection back to the pool.')
+        log.debug(f'Connection back to the pool.')
 
     @classmethod
     def close_connections(cls):
         cls.get_pool().closeall()
-        print('All connections where closed.')
+        log.debug('All connections where closed.')
 
 
 if __name__ == "__main__":
