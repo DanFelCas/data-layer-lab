@@ -1,6 +1,6 @@
 import sys
-from logger_base import log
 from psycopg2 import pool
+from src.logger_base import log
 
 
 class AccessCredentials:

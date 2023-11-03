@@ -1,10 +1,11 @@
-from logger_base import log
-from user_class import User
-from pool_cursor import PoolCursor
+from src.logger_base import log
+from src.user_class import User
+from src.pool_cursor import PoolCursor
+
 
 class UserDao:
     @staticmethod
-    def select_query(query: str) -> list[User]:
+    def select_query(query: str = "SELECT * FROM usuario;") -> list[User]:
         with PoolCursor() as cursor:
             cursor.execute(query)
             reg = cursor.fetchall()

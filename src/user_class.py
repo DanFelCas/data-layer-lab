@@ -1,6 +1,3 @@
-from logger_base import log
-
-
 class User:
     def __init__(self, user_id=None, username=None, password=None):
         self._user_id = user_id

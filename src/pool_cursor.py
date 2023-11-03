@@ -1,5 +1,6 @@
-from logger_base import log
-from connection import Connection
+from src.logger_base import log
+from src.connection import Connection
+
 
 class PoolCursor:
     def __init__(self):
