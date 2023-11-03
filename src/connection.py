@@ -53,7 +53,7 @@ class AccessCredentials:
     def get_credentials(self):
         return {
             'user': self._user,
-            'password':  self.password,
+            'password': self.password,
             'host': self._host,
             'port': self._port,
             'database': self._database
@@ -80,7 +80,7 @@ class Connection:
             try:
                 cls._pool = pool.SimpleConnectionPool(
                     cls._min_con, cls._max_con,
-                    cls._access_credentials.get_credentials()
+                    **cls._access_credentials.get_credentials()
                 )
                 print(f'Pool generation successful: {cls._pool}')
                 return cls._pool
@@ -106,3 +106,9 @@ class Connection:
     def close_connections(cls):
         cls.get_pool().closeall()
         print('All connections where closed.')
+
+
+if __name__ == "__main__":
+    conn1 = Connection.get_connection()
+    Connection.free_conn(conn1)
+    Connection.close_connections()
