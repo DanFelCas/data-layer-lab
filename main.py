@@ -15,24 +15,21 @@ while option != 5:
     if option == 1:
         users = UserDao.select_query()
         for user in users:
-            log.info(user)
-    # elif option == 2:
-    #     username_var = input('Escribe el username: ')
-    #     password_var = input('Escribe el password: ')
-    #     usuario = Usuario(username=username_var, password=password_var)
-    #     usuarios_insertados = UsuarioDAO.insertar(usuario)
-    #     log.info(f'Usuarios insertados: {usuarios_insertados}')
-    # elif option == 3:
-    #     id_usuario_var = int(input('Escribe el id_usuario a modificar: '))
-    #     username_var = input('Escribe el nuevo username: ')
-    #     password_var = input('Escribe el nuevo password: ')
-    #     usuario = Usuario(id_usuario_var, username_var, password_var)
-    #     usuarios_actualizados = UsuarioDAO.actualizar(usuario)
-    #     log.info(f'usuarios actualizados: {usuarios_actualizados}')
-    # elif option == 4:
-    #     id_usuario_var = int(input('Escribe el id_usuario a eliminar: '))
-    #     usuario = Usuario(id_usuario=id_usuario_var)
-    #     usuarios_eliminados = UsuarioDAO.eliminar(usuario)
-    #     log.info(f'usuarios eliminados: {usuarios_eliminados}')
+            log.info(user.__str__().replace("\n", " "))
+    elif option == 2:
+        username_var = input('Write the username: ')
+        password_var = input('Write the password: ')
+        user = User(username=username_var, password=password_var)
+        UserDao.insert_user(user)
+    elif option == 3:
+        user_id_var = int(input('Write the user_id to be modified: '))
+        username_var = input('Write the new username: ')
+        password_var = input('Write the new password: ')
+        user = User(user_id_var, username_var, password_var)
+        UserDao.update_user(user)
+    elif option == 4:
+        user_id_var = int(input('Write the user_id to delete: '))
+        user = User(user_id=user_id_var)
+        UserDao.delete_user(user)
 else:
     log.info('Quiting from app...')
