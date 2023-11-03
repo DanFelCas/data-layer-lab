@@ -9,6 +9,7 @@ class UserDao:
             cursor.execute(query)
             reg = cursor.fetchall()
             reg = [User(*r) for r in reg]
+            log.info(f'{len(reg)} registers found')
             return reg
 
     @staticmethod
@@ -22,6 +23,7 @@ class UserDao:
         with PoolCursor() as cursor:
             for user in args:
                 cursor.execute(query, user.get_tuple())
+                log.info(f'Inserted: \n{user}')
 
     @staticmethod
     def update_user(*args: User):
@@ -29,6 +31,7 @@ class UserDao:
         with PoolCursor() as cursor:
             for user in args:
                 cursor.execute(query, (user.username, user.password, user.user_id))
+                log.info(f'Updated: \n{user}')
 
     @staticmethod
     def delete_user(*args: User):
@@ -36,6 +39,7 @@ class UserDao:
         with PoolCursor() as cursor:
             values = tuple((user.user_id,) for user in args)
             cursor.executemany(query, values)
+            log.info(f'Delete users: {[i[0] for i in values]}')
 
 
 if __name__ == "__main__":
@@ -43,8 +47,8 @@ if __name__ == "__main__":
     q = "INSERT INTO usuario (username, password) VALUES ('daniela', '2345')"
     # UserDao.regular_query(q)
     # Insert v2
-    user1 = User(7, "paula", "4567")
-    user2 = User(2, "valentina", "5678")
+    user1 = User(6, "paula", "4567")
+    user2 = User(8, "valentina", "5678")
     # UserDao.insert_user(user1, user2)
     # Update
     # UserDao.update_user(user1)
@@ -53,4 +57,6 @@ if __name__ == "__main__":
     # Select
     register = UserDao.select_query("SELECT * FROM usuario;")
     for value in register:
-        print(value)
+        row = value.__str__().replace("\n", " ")
+        print("="*(len(row)+2))
+        print(row)
