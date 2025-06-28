@@ -1,6 +1,6 @@
 from src.logger_base import log
 from src.user_class import User
-from src.pool_cursor import PoolCursor
+from src.db_pool import PoolCursor
 
 
 class UserDao:
